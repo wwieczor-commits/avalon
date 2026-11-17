@@ -432,6 +432,8 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
 .partner:hover .p-logo img{filter:none;opacity:1;transform:scale(1.04)}
 .p-word{display:none;font-family:var(--serif);font-weight:600;font-size:24px;color:var(--ink);letter-spacing:-.01em;text-align:center;line-height:1.1}
 .p-logo.fallback img{display:none}
+.p-logo img.sq{max-height:78px}
+@media (max-width:720px){.p-logo img.sq{max-height:62px}}
 .p-logo.fallback .p-word{display:block}
 .p-meta{padding:20px 22px 22px}
 .p-meta b{display:block;font-size:17px;margin-bottom:2px}
@@ -821,7 +823,8 @@ const t=document.getElementById('cmp');if(t){const h=[...t.querySelectorAll('the
 </script>
 <script>
 function pFail(img){if(img.dataset.alt&&!img.dataset.tried){img.dataset.tried=1;img.src=img.dataset.alt;return;}img.parentNode.classList.add('fallback');}
-document.querySelectorAll('.p-logo img').forEach(i=>{if(i.complete&&i.naturalWidth===0)pFail(i);});
+function pSize(i){if(i.naturalWidth&&i.naturalWidth/i.naturalHeight<2)i.classList.add('sq');}
+document.querySelectorAll('.p-logo img').forEach(i=>{i.addEventListener('load',()=>pSize(i));if(i.complete){if(i.naturalWidth===0)pFail(i);else pSize(i);}});
 </script>
 </body>
 </html>
