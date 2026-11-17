@@ -421,6 +421,37 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .menu-bg{z-index:45}
 }
 
+
+/* ===== PARTNERZY ===== */
+.partners{background:linear-gradient(180deg,var(--paper) 0%,#efe9dd 100%);position:relative}
+.p-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.partner{background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column}
+.partner:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold-2)}
+.p-logo{height:130px;display:grid;place-items:center;padding:26px 28px;border-bottom:1px solid var(--line);background:radial-gradient(120% 120% at 50% 0%,#fff 0%,#faf7f1 100%);position:relative}
+.p-logo img{max-width:100%;max-height:52px;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.75;transition:filter .35s,opacity .35s,transform .35s}
+.partner:hover .p-logo img{filter:none;opacity:1;transform:scale(1.04)}
+.p-word{display:none;font-family:var(--serif);font-weight:600;font-size:24px;color:var(--ink);letter-spacing:-.01em;text-align:center;line-height:1.1}
+.p-logo.fallback img{display:none}
+.p-logo.fallback .p-word{display:block}
+.p-meta{padding:20px 22px 22px}
+.p-meta b{display:block;font-size:17px;margin-bottom:2px}
+.p-meta span{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.p-meta em{font-style:normal;font-size:14px;color:var(--muted)}
+.p-more{margin-top:24px;display:flex;align-items:center;gap:14px;justify-content:center;font-size:15px;color:var(--muted);text-align:center}
+.p-more span{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--ink);color:var(--gold-2);display:grid;place-items:center;font-weight:700}
+@media (max-width:980px){.p-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:720px){
+  .p-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .partner{border-radius:18px}
+  .p-logo{height:96px;padding:18px}
+  .p-logo img{max-height:38px;filter:none;opacity:1}
+  .p-word{font-size:18px}
+  .p-meta{padding:14px 14px 16px}
+  .p-meta b{font-size:15px}
+  .p-meta span{font-size:10.5px;margin-bottom:6px}
+  .p-meta em{font-size:12.5px}
+  .p-more{font-size:13.5px;justify-content:flex-start;text-align:left}
+}
 </style>
 </head>
 <body>
@@ -444,7 +475,7 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
     <div class="menu" id="menu">
       <a href="index.html">Księgowość</a>
       <a href="siedziba.html">Siedziba firmy</a>
-      <a href="#finansujemy">Co finansujemy</a>
+            <a href="#partnerzy">Partnerzy</a>
       <a href="#kalkulator">Kalkulator</a>
       <a href="#porownanie">Rodzaje leasingu</a>
       <a href="#faq">FAQ</a>
@@ -482,6 +513,37 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
     <div class="stat"><div class="num"><span data-count="2013">0</span></div><p>od tego roku zespół Avalon wspiera firmy w finansowaniu</p></div>
   </div>
 </div>
+
+<section class="partners" id="partnerzy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow">Z kim pracujemy</div>
+        <h2>Oferty czołowych firm leasingowych w jednym miejscu</h2>
+        <p class="lead">Obsługujemy klientów w zakresie leasingu m.in. z PKO Leasing, PKO Bankiem Polskim, Masterlease i Alior Leasing. Porównujemy ich oferty dla Twojej firmy i wybieramy najkorzystniejszą.</p>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="partner reveal">
+        <div class="p-logo"><img src="https://www.pkoleasing.pl/api/public/d790aecd-0090-4b8d-9dd2-99dcc0e61253.png" data-alt="https://www.pkoleasing.pl/api/public/dabcf32a-5038-4f18-8c49-b6b8bd9374bd.png" alt="PKO Leasing – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">PKO Leasing</span></div>
+        <div class="p-meta"><b>PKO Leasing</b><span>Grupa PKO Banku Polskiego</span><em>Leasing maszyn, pojazdów i sprzętu</em></div>
+      </div>
+      <div class="partner reveal">
+        <div class="p-logo"><img src="https://www.pkobp.pl/api/public/3c663fc2-a8dc-4cb9-ab55-9a4ee64b7c35.svg" data-alt="https://www.pkobp.pl/api/public/63086f97-c7b3-436b-a060-a2947f8713f4.svg" alt="PKO Bank Polski – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">PKO Bank Polski</span></div>
+        <div class="p-meta"><b>PKO Bank Polski</b><span>Leasing i finansowanie w PKO BP</span><em>Finansowanie dla firm każdej wielkości</em></div>
+      </div>
+      <div class="partner reveal">
+        <div class="p-logo"><img src="https://masterlease.pl/wp-content/uploads/2022/04/masterlease_logo.svg" alt="Masterlease – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">Masterlease</span></div>
+        <div class="p-meta"><b>Masterlease</b><span>PKO Masterlease S.A.</span><em>Leasing i wynajem długoterminowy aut</em></div>
+      </div>
+      <div class="partner reveal">
+        <div class="p-logo"><img src="https://aliorleasing.pl/wp-content/uploads/2022/10/Screenshot-2022-10-27-at-07.54.07.png" alt="Alior Leasing – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">Alior Leasing</span></div>
+        <div class="p-meta"><b>Alior Leasing</b><span>Grupa Alior Banku</span><em>Pojazdy osobowe, ciężarowe i maszyny</em></div>
+      </div>
+    </div>
+    <div class="p-more reveal"><span>+</span> oraz inne banki i firmy leasingowe – dobieramy je do przedmiotu i sytuacji Twojej firmy</div>
+  </div>
+</section>
 
 <section id="finansujemy">
   <div class="wrap">
@@ -588,7 +650,7 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
     <div class="reveal"><div class="eyebrow">FAQ</div><h2>Pytania o leasing</h2><p class="lead">Masz inne pytanie? Zadzwoń lub napisz.</p></div>
     <div class="reveal">
       <div class="faq-item"><button class="faq-q">Czy muszę być klientem biura rachunkowego?<span>+</span></button><div class="faq-a"><p>Nie. Doradztwo leasingowe prowadzimy dla wszystkich firm, niezależnie od tego, kto prowadzi ich księgowość.</p></div></div>
-      <div class="faq-item"><button class="faq-q">Z jakimi firmami leasingowymi współpracujecie?<span>+</span></button><div class="faq-a"><p>Zbieramy oferty od firm leasingowych dostępnych na rynku – zarówno bankowych, jak i niezależnych. Dobieramy je do przedmiotu, kwoty i sytuacji Twojej firmy.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Z jakimi firmami leasingowymi współpracujecie?<span>+</span></button><div class="faq-a"><p>Obsługujemy klientów m.in. w PKO Leasing, PKO Banku Polskim, Masterlease i Alior Leasing, a w razie potrzeby pytamy także inne firmy leasingowe. Dobieramy je do przedmiotu, kwoty i sytuacji Twojej firmy.</p></div></div>
       <div class="faq-item"><button class="faq-q">Czy młoda firma dostanie leasing?<span>+</span></button><div class="faq-a"><p>Często tak. Część leasingodawców finansuje firmy od pierwszych miesięcy działalności, zwykle przy wyższej wpłacie własnej. Wskażemy, gdzie szanse są największe.</p></div></div>
       <div class="faq-item"><button class="faq-q">Jakie dokumenty będą potrzebne?<span>+</span></button><div class="faq-a"><p>Zależy od kwoty i leasingodawcy. Przy mniejszych kwotach często wystarczy wniosek i dane firmy, przy większych – dokumenty finansowe. Pomożemy je przygotować.</p></div></div>
       <div class="faq-item"><button class="faq-q">Czy leasing obejmuje używane maszyny i auta?<span>+</span></button><div class="faq-a"><p>Tak, wiele firm leasingowych finansuje przedmioty używane, zwykle z ograniczeniem wieku na koniec umowy. Sprawdzimy warunki dla konkretnego przedmiotu.</p></div></div>
@@ -653,7 +715,7 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
 </svg></div><div class="logo-txt"><b>BR AVALON</b><span>RZESZÓW</span></div></div>
         <p>Księgowość, kadry i płace oraz niezależne doradztwo leasingowe dla firm z Rzeszowa i całej Polski.</p>
       </div>
-      <div><h4>Na stronie</h4><ul><li><a href="index.html">Usługi księgowe</a></li><li><a href="siedziba.html">Siedziba firmy</a></li><li><a href="#finansujemy">Co finansujemy</a></li><li><a href="#kalkulator">Kalkulator raty</a></li><li><a href="#porownanie">Rodzaje leasingu</a></li></ul></div>
+      <div><h4>Na stronie</h4><ul><li><a href="index.html">Usługi księgowe</a></li><li><a href="siedziba.html">Siedziba firmy</a></li><li><a href="#partnerzy">Firmy leasingowe</a></li><li><a href="#finansujemy">Co finansujemy</a></li><li><a href="#kalkulator">Kalkulator raty</a></li><li><a href="#porownanie">Rodzaje leasingu</a></li></ul></div>
       <div><h4>Dane spółki</h4><ul><li>BR AVALON Sp. z o.o.</li><li><a href="tel:+48533015018">tel. 533 015 018</a></li><li><a href="mailto:kdec@bravalon.pl">kdec@bravalon.pl</a></li><li>ul. Mieszka I 48/50, 35-303 Rzeszów</li><li>NIP 813-394-28-86</li><li>REGON 543305839 · KRS 0001206551</li></ul></div>
     </div>
     <div class="foot-bottom"><span>© <span id="yr"></span> BR AVALON Sp. z o.o. Wszelkie prawa zastrzeżone.</span><a href="#top">Do góry ↑</a></div>
@@ -756,6 +818,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false);});
 addEventListener('resize',()=>{if(innerWidth>720)set(false);});
 const t=document.getElementById('cmp');if(t){const h=[...t.querySelectorAll('thead th')].map(x=>x.textContent);t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{if(i)td.dataset.l=h[i];}));}
 })();
+</script>
+<script>
+function pFail(img){if(img.dataset.alt&&!img.dataset.tried){img.dataset.tried=1;img.src=img.dataset.alt;return;}img.parentNode.classList.add('fallback');}
+document.querySelectorAll('.p-logo img').forEach(i=>{if(i.complete&&i.naturalWidth===0)pFail(i);});
 </script>
 </body>
 </html>
