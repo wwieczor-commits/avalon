@@ -428,8 +428,8 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
 .partner{background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column}
 .partner:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold-2)}
 .p-logo{height:130px;display:grid;place-items:center;padding:26px 28px;border-bottom:1px solid var(--line);background:radial-gradient(120% 120% at 50% 0%,#fff 0%,#faf7f1 100%);position:relative}
-.p-logo img{max-width:100%;max-height:52px;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.75;transition:filter .35s,opacity .35s,transform .35s}
-.partner:hover .p-logo img{filter:none;opacity:1;transform:scale(1.04)}
+.p-logo img{max-width:100%;max-height:52px;object-fit:contain;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s}
+.partner:hover .p-logo img{transform:scale(1.1) translateZ(30px);filter:drop-shadow(0 10px 14px rgba(13,27,42,.18))}
 .p-word{display:none;font-family:var(--serif);font-weight:600;font-size:24px;color:var(--ink);letter-spacing:-.01em;text-align:center;line-height:1.1}
 .p-logo.fallback img{display:none}
 .p-logo img.sq{max-height:78px}
@@ -446,7 +446,7 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .p-grid{grid-template-columns:1fr 1fr;gap:12px}
   .partner{border-radius:18px}
   .p-logo{height:96px;padding:18px}
-  .p-logo img{max-height:38px;filter:none;opacity:1}
+  .p-logo img{max-height:38px}
   .p-word{font-size:18px}
   .p-meta{padding:14px 14px 16px}
   .p-meta b{font-size:15px}
@@ -454,6 +454,23 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .p-meta em{font-size:12.5px}
   .p-more{font-size:13.5px;justify-content:flex-start;text-align:left}
 }
+
+/* ===== PARTNERZY – interakcja ===== */
+.p-grid{perspective:1000px}
+.partner{position:relative;transform-style:preserve-3d;will-change:transform;transition:opacity .8s,transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.partner:hover{transform:translateY(-8px);box-shadow:0 30px 60px -24px rgba(13,27,42,.35),0 0 0 1px var(--gold-2);border-color:var(--gold-2)}
+.partner .p-logo{overflow:hidden}
+.partner .p-logo:before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(217,185,119,.45),transparent);transform:skewX(-20deg);pointer-events:none}
+.partner:hover .p-logo:before{animation:shine .9s ease}
+@keyframes shine{from{left:-60%}to{left:130%}}
+.p-ok{position:absolute;top:12px;right:12px;z-index:3;padding:5px 11px;border-radius:99px;background:var(--ink);color:var(--gold-2);font-size:11px;font-weight:800;letter-spacing:.08em;opacity:0;transform:translateY(-6px) scale(.9);transition:opacity .3s,transform .3s}
+.partner:hover .p-ok{opacity:1;transform:none}
+.partner:after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,#9c7533,#d9b977);transition:width .45s ease}
+.partner:hover:after{width:100%}
+.partner .p-meta b{transition:color .3s}
+.partner:hover .p-meta b{color:#9c7533}
+@media (hover:none){.p-ok{opacity:1;transform:none}.partner:active{transform:scale(.98)}}
+@media (prefers-reduced-motion:reduce){.partner,.partner:hover{transform:none!important}.partner:hover .p-logo:before{animation:none}}
 </style>
 </head>
 <body>
@@ -526,19 +543,19 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
       </div>
     </div>
     <div class="p-grid">
-      <div class="partner reveal">
+      <div class="partner reveal"><span class="p-ok">✓ OBSŁUGUJEMY</span>
         <div class="p-logo"><img src="https://www.pkoleasing.pl/api/public/d790aecd-0090-4b8d-9dd2-99dcc0e61253.png" data-alt="https://www.pkoleasing.pl/api/public/dabcf32a-5038-4f18-8c49-b6b8bd9374bd.png" alt="PKO Leasing – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">PKO Leasing</span></div>
         <div class="p-meta"><b>PKO Leasing</b><span>Grupa PKO Banku Polskiego</span><em>Leasing maszyn, pojazdów i sprzętu</em></div>
       </div>
-      <div class="partner reveal">
+      <div class="partner reveal"><span class="p-ok">✓ OBSŁUGUJEMY</span>
         <div class="p-logo"><img src="https://www.pkobp.pl/api/public/3c663fc2-a8dc-4cb9-ab55-9a4ee64b7c35.svg" data-alt="https://www.pkobp.pl/api/public/63086f97-c7b3-436b-a060-a2947f8713f4.svg" alt="PKO Bank Polski – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">PKO Bank Polski</span></div>
         <div class="p-meta"><b>PKO Bank Polski</b><span>Leasing i finansowanie w PKO BP</span><em>Finansowanie dla firm każdej wielkości</em></div>
       </div>
-      <div class="partner reveal">
+      <div class="partner reveal"><span class="p-ok">✓ OBSŁUGUJEMY</span>
         <div class="p-logo"><img src="https://masterlease.pl/wp-content/uploads/2022/04/masterlease_logo.svg" alt="Masterlease – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">Masterlease</span></div>
         <div class="p-meta"><b>Masterlease</b><span>PKO Masterlease S.A.</span><em>Leasing i wynajem długoterminowy aut</em></div>
       </div>
-      <div class="partner reveal">
+      <div class="partner reveal"><span class="p-ok">✓ OBSŁUGUJEMY</span>
         <div class="p-logo"><img src="https://aliorleasing.pl/wp-content/uploads/2022/10/Screenshot-2022-10-27-at-07.54.07.png" alt="Alior Leasing – logo" loading="lazy" referrerpolicy="no-referrer" onerror="pFail(this)"><span class="p-word">Alior Leasing</span></div>
         <div class="p-meta"><b>Alior Leasing</b><span>Grupa Alior Banku</span><em>Pojazdy osobowe, ciężarowe i maszyny</em></div>
       </div>
@@ -825,6 +842,14 @@ const t=document.getElementById('cmp');if(t){const h=[...t.querySelectorAll('the
 function pFail(img){if(img.dataset.alt&&!img.dataset.tried){img.dataset.tried=1;img.src=img.dataset.alt;return;}img.parentNode.classList.add('fallback');}
 function pSize(i){if(i.naturalWidth&&i.naturalWidth/i.naturalHeight<2)i.classList.add('sq');}
 document.querySelectorAll('.p-logo img').forEach(i=>{i.addEventListener('load',()=>pSize(i));if(i.complete){if(i.naturalWidth===0)pFail(i);else pSize(i);}});
+</script>
+<script>
+(function(){if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+document.querySelectorAll('.partner').forEach(c=>{
+ c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.transform=`translateY(-8px) rotateX(${(-y*10).toFixed(2)}deg) rotateY(${(x*12).toFixed(2)}deg)`;});
+ c.addEventListener('mouseleave',()=>{c.style.transform='';});
+});})();
 </script>
 </body>
 </html>
