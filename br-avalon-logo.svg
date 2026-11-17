@@ -10,6 +10,5 @@
     <path d="M21.5 40 L28 34.5 L33 37.5 L42.5 28" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="42.5" cy="28" r="3.4" fill="#fff"/>
   </g>
-  <text x="108" y="52" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="38" fill="#0d1b2a" letter-spacing="2">BR <tspan fill="#a8823d">AVALON</tspan></text>
-  <text x="110" y="76" font-family="Manrope, Arial, sans-serif" font-weight="700" font-size="12.5" fill="#5d6b7a" letter-spacing="6">RZESZÓW</text>
+  <text x="108" y="61.6" font-family="Fraunces, Georgia, serif" font-weight="600" font-size="38" fill="#0d1b2a" letter-spacing="2">BR <tspan fill="#a8823d">AVALON</tspan></text>
 </svg>
