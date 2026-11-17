@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8"><title>Stopka e-mail – BR AVALON</title>
+<meta name="robots" content="noindex">
+<style>body{margin:0;background:#f6f4ef;font-family:Arial,sans-serif;color:#0d1b2a}.wrap{max-width:720px;margin:40px auto;padding:0 20px}.hint{font-size:14px;color:#5d6b7a;line-height:1.6;margin-bottom:24px}.box{background:#fff;border:1px solid #e3ded3;border-radius:16px;padding:32px}.btn{display:inline-block;margin-top:18px;background:#0d1b2a;color:#fff;border:0;border-radius:99px;padding:12px 22px;font-weight:700;font-size:14px;cursor:pointer}</style>
+</head><body><div class="wrap">
+<div class="hint"><b>Jak wstawić stopkę:</b> kliknij „Kopiuj stopkę”, a potem wklej (Cmd+V / Ctrl+V) w ustawieniach podpisu w Gmailu, Spark, Outlooku lub Apple Mail.</div>
+<div class="box"><div id="sig">
+<!-- STOPKA START -->
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0d1b2a;">
+  <tr>
+    <td style="padding:0 18px 0 0;vertical-align:top;">
+      <img src="https://wwieczor-commits.github.io/avalon/assets/logo-mark-128.png" width="64" height="64" alt="BR AVALON" style="display:block;width:64px;height:64px;border:0;border-radius:14px;">
+    </td>
+    <td style="padding:0 0 0 18px;border-left:2px solid #c19a52;vertical-align:top;">
+      <div style="font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:bold;line-height:1.2;color:#0d1b2a;">Katarzyna Dec</div>
+      <div style="font-size:11px;letter-spacing:2px;font-weight:bold;color:#b08a45;padding-top:3px;">PREZES ZARZĄDU</div>
+      <div style="font-size:14px;font-weight:bold;padding-top:10px;color:#0d1b2a;">BR <span style="color:#b08a45;">AVALON</span> Sp. z o.o.</div>
+      <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:6px;font-size:13px;line-height:20px;color:#0d1b2a;">
+        <tr><td style="color:#b08a45;font-weight:bold;padding-right:8px;font-size:11px;">T</td><td><a href="tel:+48533015018" style="color:#0d1b2a;text-decoration:none;">533 015 018</a></td></tr>
+        <tr><td style="color:#b08a45;font-weight:bold;padding-right:8px;font-size:11px;">E</td><td><a href="mailto:kdec@bravalon.pl" style="color:#0d1b2a;text-decoration:none;">kdec@bravalon.pl</a></td></tr>
+        <tr><td style="color:#b08a45;font-weight:bold;padding-right:8px;font-size:11px;">A</td><td>ul. Mieszka I 48/50, 35-303 Rzeszów</td></tr>
+        <tr><td style="color:#b08a45;font-weight:bold;padding-right:8px;font-size:11px;">W</td><td><a href="https://wwieczor-commits.github.io/avalon/" style="color:#0d1b2a;text-decoration:none;">Strona www</a></td></tr>
+      </table>
+      <div style="margin-top:10px;font-size:11px;letter-spacing:1px;color:#5d6b7a;">KSIĘGOWOŚĆ · KADRY I PŁACE · DORADZTWO LEASINGOWE · SIEDZIBA FIRMY</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding-top:14px;">
+      <div style="border-top:1px solid #e3ded3;padding-top:8px;font-size:10px;line-height:15px;color:#8a96a3;max-width:560px;">BR AVALON Sp. z o.o., ul. Mieszka I 48/50, 35-303 Rzeszów · Sąd Rejonowy w Rzeszowie, XII Wydział Gospodarczy KRS · KRS 0001206551 · NIP 813-394-28-86 · REGON 543305839 · Kapitał zakładowy 5 000,00 zł</div>
+    </td>
+  </tr>
+</table>
+<!-- STOPKA KONIEC -->
+</div>
+<button class="btn" id="copy">Kopiuj stopkę</button> <span id="ok" style="font-size:13px;color:#2e7d32;margin-left:10px"></span>
+</div></div>
+<script>
+document.getElementById('copy').onclick=async()=>{const el=document.getElementById('sig');
+ try{await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([el.innerHTML],{type:'text/html'}),'text/plain':new Blob([el.innerText],{type:'text/plain'})})]);document.getElementById('ok').textContent='Skopiowano – wklej w ustawieniach podpisu.';}
+ catch(e){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');document.getElementById('ok').textContent='Skopiowano.';}catch(_){document.getElementById('ok').textContent='Zaznaczono – naciśnij Cmd+C / Ctrl+C.';}}};
+</script>
+</body></html>
