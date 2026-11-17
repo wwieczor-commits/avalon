@@ -353,6 +353,40 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .menu-bg{z-index:45}
 }
 
+
+/* ===== KALKULATOR v2 ===== */
+.calc-box label{align-items:center}
+.num-wrap{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:4px 10px}
+.num-wrap:focus-within{border-color:var(--gold)}
+.num-wrap input{width:72px;background:transparent;border:0;color:#fff;font:inherit;font-weight:700;font-size:16px;text-align:right;outline:none;-moz-appearance:textfield}
+.num-wrap input::-webkit-outer-spin-button,.num-wrap input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.num-wrap em{font-style:normal;font-size:12px;color:rgba(255,255,255,.55)}
+.inv-toggle{margin-top:18px;width:100%;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:12px;padding:12px 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.inv-toggle span{color:var(--gold-2);font-size:18px;transition:transform .3s}
+.inv-toggle.open span{transform:rotate(45deg)}
+.inv{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.inv.open{max-height:700px}
+.inv table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+.inv th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:700;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,.12)}
+.inv td{padding:10px 6px;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.88);vertical-align:top}
+.inv th:nth-child(n+2),.inv td:nth-child(n+2){text-align:right;white-space:nowrap}
+.inv-sum{margin-top:12px;display:grid;gap:6px}
+.inv-sum div{display:flex;justify-content:space-between;font-size:14px;color:rgba(255,255,255,.75)}
+.inv-sum b{color:#fff}
+.inv-sum .gross{margin-top:6px;padding-top:10px;border-top:1px solid rgba(193,154,82,.4);font-size:16px}
+.inv-sum .gross b{color:var(--gold-2);font-size:18px}
+@media (max-width:720px){
+  .inv table,.inv thead,.inv tbody,.inv tr,.inv td{display:block;width:100%}
+  .inv thead{display:none}
+  .inv tr{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .inv td{border:0;padding:2px 0;text-align:left!important}
+  .inv td:first-child{font-weight:700;color:#fff}
+  .inv td:nth-child(2):before{content:"Ilość: "}
+  .inv td:nth-child(3):before{content:"Cena netto: "}
+  .inv td:nth-child(4):before{content:"Wartość netto: "}
+  .inv td:nth-child(n+2){font-size:12.5px;color:rgba(255,255,255,.65)}
+  .num-wrap input{width:64px}
+}
 </style>
 </head>
 <body>
@@ -499,18 +533,32 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
       <div style="position:relative;z-index:1">
         <div class="eyebrow">Cennik</div>
         <h2>Ile kosztuje księgowość?</h2>
-        <p class="lead">Cena zależy głównie od liczby dokumentów w miesiącu. Przesuń suwaki – zobaczysz orientacyjną stawkę miesięczną.</p>
+        <p class="lead">Cena zależy głównie od liczby dokumentów w miesiącu. Wpisz liczbę dokumentów i pracowników albo przesuń suwaki – zobaczysz kwotę miesięczną i podgląd faktury.</p>
       </div>
       <div class="calc-box">
-        <label>Liczba dokumentów miesięcznie <b id="docs-val">20</b></label>
-        <input type="range" id="docs" min="0" max="100" step="1" value="22" aria-label="Liczba dokumentów">
-        <label>Liczba pracowników <b id="emp-val">0</b></label>
-        <input type="range" id="emp" min="0" max="50" step="1" value="0" aria-label="Liczba pracowników">
+        <label for="docs-num">Liczba zaksięgowanych dokumentów w miesiącu
+          <span class="num-wrap"><input type="number" id="docs-num" min="0" max="20000" step="1" value="20" inputmode="numeric" aria-label="Liczba dokumentów"><em>szt.</em></span></label>
+        <input type="range" id="docs" min="0" max="100" step="1" value="23" aria-label="Suwak liczby dokumentów">
+        <label for="emp-num">Liczba pracowników
+          <span class="num-wrap"><input type="number" id="emp-num" min="0" max="500" step="1" value="0" inputmode="numeric" aria-label="Liczba pracowników"><em>os.</em></span></label>
+        <input type="range" id="emp" min="0" max="50" step="1" value="0" aria-label="Suwak liczby pracowników">
         <div class="result">
-          <div><div class="price" id="price">544 <small>zł netto / mies.</small></div></div>
+          <div class="price" id="price">504,00 <small>zł netto / mies.</small></div>
           <div class="tier" id="tier">pakiet do 20 dokumentów</div>
         </div>
-        <p class="note">Ceny orientacyjne netto. Dokładną wycenę przygotujemy po krótkiej rozmowie. Stawki są co roku waloryzowane o wskaźnik wzrostu płacy minimalnej.</p>
+        <button class="inv-toggle" id="inv-toggle" type="button" aria-expanded="false">Podgląd faktury <span>+</span></button>
+        <div class="inv" id="inv">
+          <table>
+            <thead><tr><th>Pozycja</th><th>Ilość</th><th>Cena netto</th><th>Wartość netto</th></tr></thead>
+            <tbody id="inv-rows"></tbody>
+          </table>
+          <div class="inv-sum">
+            <div><span>Razem netto</span><b id="inv-net">–</b></div>
+            <div><span>VAT 23%</span><b id="inv-vat">–</b></div>
+            <div class="gross"><span>Do zapłaty brutto</span><b id="inv-gross">–</b></div>
+          </div>
+        </div>
+        <p class="note">Ceny netto według aktualnego cennika BR AVALON. Powyżej 2000 dokumentów dopłata 3,00 zł netto za każdy dodatkowy dokument. Stawki są co roku waloryzowane o wskaźnik wzrostu płacy minimalnej.</p>
       </div>
     </div>
   </div>
@@ -678,23 +726,38 @@ function countUp(el){const t=+el.dataset.count,from=t>1000?t-40:0,dur=1400,st=pe
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-count]').forEach(countUp);io.unobserve(e.target);}}),{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// ---- Kalkulator
-const TIERS=[[20,544],[50,771],[100,1247],[200,1948],[350,3085],[500,4348],[750,6016],[1000,7783],[1500,10090],[2000,11500]];
-const docs=document.getElementById('docs'),emp=document.getElementById('emp');
-function fmt(n){return n.toLocaleString('pl-PL');}
-function calc(){
-  const n=Math.round(2000*Math.pow(+docs.value/100,2.2)),e=+emp.value;
-  document.getElementById('docs-val').textContent=n===2000?'2000+':n;
-  document.getElementById('emp-val').textContent=e;
+// ---- Kalkulator (cennik BR AVALON)
+const TIERS=[[20,504],[50,714],[100,1155],[200,1805],[350,2857],[500,4026],[750,5571],[1000,7207],[1500,9350],[2000,10649]];
+const EXTRA_PER_DOC=3, PER_EMP=50, VAT=0.23, SLIDER_MAX_DOCS=3000;
+const $c=id=>document.getElementById(id);
+const docs=$c('docs'),emp=$c('emp'),docsNum=$c('docs-num'),empNum=$c('emp-num');
+const money=n=>n.toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2});
+const toDocs=v=>Math.round(SLIDER_MAX_DOCS*Math.pow(v/100,2.2));
+const toSlider=n=>Math.round(100*Math.pow(Math.min(n,SLIDER_MAX_DOCS)/SLIDER_MAX_DOCS,1/2.2));
+function price(n,e){
   let i=TIERS.findIndex(t=>n<=t[0]);if(i<0)i=TIERS.length-1;
-  const base=TIERS[i][1];
-  const total=base+e*50;
-  document.getElementById('price').innerHTML='od '+fmt(total)+' <small>zł netto / mies.</small>';
-  const from=i===0?0:TIERS[i-1][0]+1;
-  document.getElementById('tier').innerHTML='pakiet '+(i===0?'do 20':from+'–'+TIERS[i][0])+' dokumentów'+(e?'<br>+ '+e+' × 50 zł za pracownika':'');
+  const base=TIERS[i][1],extra=Math.max(0,n-2000),from=i===0?0:TIERS[i-1][0]+1;
+  const label=i===0?'do 20':from+'–'+TIERS[i][0];
+  const rows=[['Usługi księgowe – pakiet '+label+' dokumentów',1,base,base]];
+  if(extra)rows.push(['Dokumenty powyżej 2000 szt.',extra,EXTRA_PER_DOC,extra*EXTRA_PER_DOC]);
+  if(e)rows.push(['Obsługa kadrowo-płacowa pracownika',e,PER_EMP,e*PER_EMP]);
+  const net=rows.reduce((s,r)=>s+r[3],0),vat=Math.round(net*VAT*100)/100;
+  return {label,extra,rows,net,vat,gross:net+vat};
 }
-[docs,emp].forEach(x=>x.addEventListener('input',calc));
-calc();
+function render(){
+  const n=Math.max(0,Math.floor(+docsNum.value||0)),e=Math.max(0,Math.floor(+empNum.value||0));
+  const r=price(n,e);
+  $c('price').innerHTML=money(r.net)+' <small>zł netto / mies.</small>';
+  $c('tier').innerHTML='pakiet '+r.label+' dokumentów'+(r.extra?'<br>+ '+r.extra+' × 3,00 zł za dokumenty powyżej 2000':'')+(e?'<br>+ '+e+' × 50,00 zł za pracownika':'');
+  $c('inv-rows').innerHTML=r.rows.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+money(x[2])+'</td><td>'+money(x[3])+'</td></tr>').join('');
+  $c('inv-net').textContent=money(r.net)+' zł';$c('inv-vat').textContent=money(r.vat)+' zł';$c('inv-gross').textContent=money(r.gross)+' zł';
+}
+docs.addEventListener('input',()=>{docsNum.value=toDocs(+docs.value);render();});
+emp.addEventListener('input',()=>{empNum.value=emp.value;render();});
+docsNum.addEventListener('input',()=>{docs.value=toSlider(+docsNum.value||0);render();});
+empNum.addEventListener('input',()=>{emp.value=Math.min(50,+empNum.value||0);render();});
+$c('inv-toggle').addEventListener('click',function(){const o=$c('inv').classList.toggle('open');this.setAttribute('aria-expanded',o);this.classList.toggle('open',o);});
+render();
 
 // ---- FAQ
 document.querySelectorAll('.faq-item').forEach(it=>{const q=it.querySelector('.faq-q'),a=it.querySelector('.faq-a');
