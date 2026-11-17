@@ -406,6 +406,42 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .offer{grid-template-columns:64px 1fr 52px;font-size:12px}
 }
 
+/* ===== MOBILE MENU v2 ===== */
+.menu-foot{display:none}
+@media (max-width:720px){
+  nav.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(13,27,42,.97)}
+  body.menu-open nav{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .menu{position:fixed;top:0;right:0;bottom:auto;left:auto;height:100vh;height:100dvh;width:min(86vw,360px);
+    background:linear-gradient(180deg,#14273b 0%,#0d1b2a 100%);border-left:1px solid rgba(193,154,82,.25);
+    box-shadow:-30px 0 60px -20px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:stretch;
+    padding:96px 24px calc(24px + env(safe-area-inset-bottom));gap:0;overflow-y:auto;z-index:55;
+    transform:translateX(105%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.8,.2,1),visibility .38s}
+  .menu.open{transform:none;visibility:visible}
+  .menu:before{content:"MENU";position:absolute;top:34px;left:24px;font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--gold)}
+  .menu a{display:flex;justify-content:space-between;align-items:center;width:100%;padding:16px 4px;font-size:18px;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.08);
+    opacity:0;transform:translateX(16px);transition:opacity .35s,transform .35s,color .2s}
+  .menu a:not(.btn):after{content:"›";font-size:24px;color:var(--gold);line-height:1}
+  .menu a:active{color:var(--gold-2)}
+  .menu.open a{opacity:1;transform:none}
+  .menu.open a:nth-child(1){transition-delay:.06s}.menu.open a:nth-child(2){transition-delay:.1s}.menu.open a:nth-child(3){transition-delay:.14s}
+  .menu.open a:nth-child(4){transition-delay:.18s}.menu.open a:nth-child(5){transition-delay:.22s}.menu.open a:nth-child(6){transition-delay:.26s}.menu.open a:nth-child(7){transition-delay:.3s}
+  .menu a.btn{margin-top:22px;justify-content:center;border:0;padding:15px 20px;color:var(--ink)!important;font-size:16px}
+  .menu-foot{margin-top:auto;padding-top:26px;display:grid;gap:10px}
+  .menu-foot a{border:1px solid rgba(255,255,255,.14)!important;border-radius:14px;padding:14px 16px!important;font-size:15px!important;justify-content:flex-start!important;gap:12px;opacity:1!important;transform:none!important}
+  .menu-foot a:after{content:none!important}
+  .menu-foot small{display:block;font-size:11px;color:rgba(255,255,255,.5);font-weight:500;letter-spacing:.04em}
+  .menu-foot .ic{width:36px;height:36px;border-radius:10px;background:rgba(193,154,82,.15);display:grid;place-items:center;flex:0 0 36px;color:var(--gold-2);font-size:16px}
+  .burger{position:relative;z-index:60;display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:0;padding:0;-webkit-tap-highlight-color:transparent}
+  .burger span{position:absolute;left:13px;right:13px;height:2px;border-radius:2px;background:#fff;transition:transform .3s,opacity .2s,top .3s}
+  .burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:22px}.burger span:nth-child(3){top:28px}
+  body.menu-open .burger span:nth-child(1){top:22px;transform:rotate(45deg)}
+  body.menu-open .burger span:nth-child(2){opacity:0}
+  body.menu-open .burger span:nth-child(3){top:22px;transform:rotate(-45deg)}
+  body.menu-open .burger{background:var(--gold);border-color:var(--gold)}
+  body.menu-open .burger span{background:var(--ink)}
+  .menu-bg{z-index:45}
+}
+
 </style>
 </head>
 <body>
@@ -718,10 +754,17 @@ $('yr').textContent=new Date().getFullYear();
 </script>
 <script>
 (function(){const m=document.getElementById('menu'),b=document.getElementById('burger');if(!m||!b)return;
+b.innerHTML='<span></span><span></span><span></span>';b.setAttribute('aria-controls','menu');b.setAttribute('aria-expanded','false');
+const f=document.createElement('div');f.className='menu-foot';
+f.innerHTML='<a href="tel:+48533015018"><span class="ic">☎</span><span>533 015 018<small>Zadzwoń</small></span></a><a href="mailto:kdec@bravalon.pl"><span class="ic">✉</span><span>kdec@bravalon.pl<small>Napisz e-mail</small></span></a>';
+m.appendChild(f);
 const bg=document.createElement('div');bg.className='menu-bg';document.body.appendChild(bg);
-function set(o){m.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);b.textContent=o?'✕':'☰';b.setAttribute('aria-expanded',o);}
-b.addEventListener('click',e=>{e.stopImmediatePropagation();set(!m.classList.contains('open'));},true);
-bg.addEventListener('click',()=>set(false));m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+function set(o){m.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);b.setAttribute('aria-expanded',o);}
+b.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();set(!m.classList.contains('open'));},true);
+bg.addEventListener('click',()=>set(false));
+m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false);});
+addEventListener('resize',()=>{if(innerWidth>720)set(false);});
 const t=document.getElementById('cmp');if(t){const h=[...t.querySelectorAll('thead th')].map(x=>x.textContent);t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{if(i)td.dataset.l=h[i];}));}
 })();
 </script>
