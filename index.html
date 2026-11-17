@@ -387,6 +387,36 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .inv td:nth-child(n+2){font-size:12.5px;color:rgba(255,255,255,.65)}
   .num-wrap input{width:64px}
 }
+
+/* ===== FILM ===== */
+.vid-wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;margin-bottom:56px;background:linear-gradient(150deg,#0d1b2a,#1d3550);border-radius:32px;padding:48px;position:relative;overflow:hidden;color:#fff}
+.vid-wrap:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(193,154,82,.28),transparent 70%);right:-140px;top:-200px;pointer-events:none}
+.vid-text{position:relative;z-index:1}
+.inno{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:99px;background:linear-gradient(135deg,#d9b977,#a8823d);color:#0d1b2a;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 10px 24px -10px rgba(193,154,82,.8)}
+.vid-text h3{font-size:clamp(28px,3vw,40px);margin:18px 0 14px;line-height:1.15}
+.vid-text p{color:rgba(255,255,255,.75);font-size:16.5px;margin-bottom:22px}
+.vid-points{list-style:none;display:grid;gap:12px}
+.vid-points li{display:flex;align-items:center;gap:14px;font-weight:600;font-size:15.5px}
+.vid-points b{width:32px;height:32px;flex:0 0 32px;border-radius:10px;background:rgba(193,154,82,.18);border:1px solid rgba(193,154,82,.5);color:#d9b977;display:grid;place-items:center;font-family:var(--serif);font-size:16px}
+.vid-card{position:relative;z-index:1;border-radius:22px;overflow:hidden;aspect-ratio:16/9;background:#0d1b2a;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.12)}
+.vid-card video{width:100%;height:100%;display:block;object-fit:cover}
+.vid-play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:0;cursor:pointer;background:rgba(193,154,82,.95);color:#0d1b2a;font-size:28px;display:grid;place-items:center;box-shadow:0 0 0 12px rgba(193,154,82,.25);transition:transform .25s,opacity .3s}
+.vid-play span{margin-left:5px}
+.vid-play:hover{transform:scale(1.08)}
+.vid-card.playing .vid-play{opacity:0;pointer-events:none}
+.vid-sound{position:absolute;left:14px;bottom:14px;border:0;border-radius:99px;padding:8px 14px;background:rgba(13,27,42,.75);color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px);display:none;align-items:center;gap:6px}
+.vid-sound em{font-style:normal}
+.vid-card.playing .vid-sound{display:inline-flex}
+.vid-badge{position:absolute;right:14px;top:14px;padding:5px 11px;border-radius:99px;background:rgba(13,27,42,.7);font-size:12px;font-weight:700;letter-spacing:.08em}
+@media (max-width:980px){.vid-wrap{grid-template-columns:1fr;gap:30px;padding:34px}}
+@media (max-width:720px){
+  .vid-wrap{padding:22px 18px 26px;border-radius:24px;margin:0 -4px 40px;gap:22px}
+  .vid-card{order:-1;border-radius:16px}
+  .vid-play{width:64px;height:64px;font-size:22px;box-shadow:0 0 0 9px rgba(193,154,82,.25)}
+  .vid-text h3{font-size:26px;margin:14px 0 10px}
+  .vid-text p{font-size:15px}
+  .inno{font-size:11.5px;padding:7px 13px}
+}
 </style>
 </head>
 <body>
@@ -414,7 +444,7 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
       <a href="#cennik">Cennik</a>
       <a href="leasing.html">Leasing</a>
       <a href="siedziba.html">Siedziba firmy</a>
-      <a href="#wspolpraca">Współpraca</a>
+      <a href="#wspolpraca">Jak to działa</a>
       <a href="#faq">FAQ</a>
       <a href="#kontakt" class="btn btn-gold" style="padding:10px 20px;color:var(--ink)">Kontakt</a>
     </div>
@@ -570,6 +600,24 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
       <div>
         <div class="eyebrow">Współpraca</div>
         <h2>Prosty, comiesięczny rytm</h2>
+      </div>
+    </div>
+    <div class="vid-wrap reveal">
+      <div class="vid-text">
+        <span class="inno">★ Nasza innowacja</span>
+        <h3>Folder Avalon – księgowość w&nbsp;20&nbsp;sekund</h3>
+        <p>Wrzucasz faktury do jednego folderu – z telefonu, maila albo komputera. My je księgujemy, a Ty od razu dostajesz informację, ile podatków i ZUS zapłacisz i do kiedy.</p>
+        <ul class="vid-points">
+          <li><b>1</b>Wrzucasz dokumenty do folderu</li>
+          <li><b>2</b>Księgujemy i rozliczamy</li>
+          <li><b>3</b>Znasz kwoty i terminy od razu</li>
+        </ul>
+      </div>
+      <div class="vid-card">
+        <video id="promo" src="media/br-avalon-film.mp4" poster="media/br-avalon-film-poster.jpg" muted playsinline loop preload="metadata" aria-label="Film: jak działa Folder Avalon"></video>
+        <button class="vid-play" id="vid-play" type="button" aria-label="Odtwórz film z dźwiękiem"><span>▶</span></button>
+        <button class="vid-sound" id="vid-sound" type="button" aria-label="Włącz dźwięk">🔇 <em>Włącz dźwięk</em></button>
+        <div class="vid-badge">20 s</div>
       </div>
     </div>
     <div class="steps">
@@ -791,6 +839,18 @@ m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false);});
 addEventListener('resize',()=>{if(innerWidth>720)set(false);});
 const t=document.getElementById('cmp');if(t){const h=[...t.querySelectorAll('thead th')].map(x=>x.textContent);t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{if(i)td.dataset.l=h[i];}));}
+})();
+</script>
+<script>
+(function(){const v=document.getElementById('promo');if(!v)return;const card=v.parentNode,play=document.getElementById('vid-play'),snd=document.getElementById('vid-sound');
+function setSound(on){v.muted=!on;snd.innerHTML=on?'🔊 <em>Wycisz</em>':'🔇 <em>Włącz dźwięk</em>';}
+function start(withSound){setSound(withSound);const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{});card.classList.add('playing');}
+play.addEventListener('click',()=>{v.currentTime=0;start(true);});
+snd.addEventListener('click',e=>{e.stopPropagation();setSound(v.muted);});
+v.addEventListener('click',()=>{if(v.paused){start(!v.muted);}else{v.pause();card.dataset.stopped=1;card.classList.remove('playing');}});
+// autostart bez dźwięku, gdy film jest widoczny
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(v.paused&&!card.dataset.stopped)start(false);}else if(!v.paused){v.pause();}}),{threshold:.5}).observe(v);}
 })();
 </script>
 </body>
