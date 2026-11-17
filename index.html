@@ -417,6 +417,34 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
   .vid-text p{font-size:15px}
   .inno{font-size:11.5px;padding:7px 13px}
 }
+
+/* ===== ZDJĘCIE O NAS ===== */
+.about-photo{position:relative;padding:40px 0 34px 34px}
+.about-photo:before{content:"";position:absolute;left:0;bottom:0;width:72%;height:78%;border-radius:28px;background:linear-gradient(150deg,var(--ink),var(--ink-3))}
+.about-photo:after{content:"";position:absolute;left:14px;bottom:14px;width:120px;height:120px;border-radius:50%;border:2px dashed rgba(193,154,82,.55)}
+.ph-frame{position:relative;z-index:1;border-radius:26px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 80px -30px rgba(13,27,42,.55);border:6px solid #fff}
+.ph-frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.about-photo:hover .ph-frame img{transform:scale(1.03)}
+.ph-badge{position:absolute;z-index:2;right:-18px;top:-34px;background:linear-gradient(135deg,#d9b977,#a8823d);color:var(--ink);border-radius:20px;padding:18px 20px;box-shadow:0 20px 40px -16px rgba(168,130,61,.8);display:flex;align-items:center;gap:14px}
+.ph-n{font-family:var(--serif);font-size:38px;font-weight:600;line-height:1}
+.ph-t{font-size:12.5px;font-weight:700;line-height:1.35}
+.ph-card{position:absolute;z-index:2;left:0;bottom:60px;background:#fff;border-radius:18px;padding:14px 20px 14px 14px;display:flex;align-items:center;gap:14px;box-shadow:0 24px 50px -20px rgba(13,27,42,.45)}
+.ph-mk{width:46px;height:46px;flex:0 0 46px;border-radius:12px;overflow:hidden}
+.ph-mk svg{width:100%;height:100%;display:block}
+.ph-card b{display:block;font-size:15px}
+.ph-card span{font-size:12.5px;color:var(--muted)}
+@media (max-width:980px){.about-photo{max-width:520px;margin:0 auto}}
+@media (max-width:720px){
+  .about-photo{padding:30px 0 22px 18px;margin:0 6px}
+  .about-photo:after{width:80px;height:80px;left:4px;bottom:4px}
+  .ph-frame{border-width:4px;border-radius:20px}
+  .ph-badge{right:-6px;top:-26px;padding:10px 14px;border-radius:16px;gap:10px}
+  .ph-n{font-size:28px}
+  .ph-t{font-size:11px}
+  .ph-card{bottom:40px;left:-4px;padding:10px 14px 10px 10px;border-radius:14px}
+  .ph-mk{width:38px;height:38px;flex-basis:38px}
+  .ph-card b{font-size:14px}
+}
 </style>
 </head>
 <body>
@@ -540,9 +568,23 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
 
 <section class="about" id="o-nas">
   <div class="wrap about-grid">
-    <div class="about-visual reveal">
-      <blockquote>„Klient ma wiedzieć, ile i do kiedy płaci – zanim zdąży o to zapytać.”</blockquote>
-      <cite>Zasada pracy zespołu BR AVALON</cite>
+    <div class="about-photo reveal">
+      <div class="ph-frame"><img src="assets/zespol.jpg" alt="Zespół BR AVALON" width="800" height="1000" loading="lazy"></div>
+      <div class="ph-badge"><div class="ph-n">2013</div><div class="ph-t">od tego roku<br>obsługujemy firmy<br>w Rzeszowie</div></div>
+      <div class="ph-card">
+        <div class="ph-mk"><svg viewBox="0 0 64 64" aria-hidden="true">
+  <defs>
+    <linearGradient id="gph" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#9c7533"/><stop offset="1" stop-color="#e4c98a"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#0d1b2a"/>
+  <path d="M14 50 L29.5 14.5 Q32 9.5 34.5 14.5 L50 50" fill="none" stroke="url(#gph)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M21.5 40 L28 34.5 L33 37.5 L42.5 28" fill="none" stroke="#ffffff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="42.5" cy="28" r="3.4" fill="#ffffff"/>
+</svg></div>
+        <div><b>Zespół BR AVALON</b><span>Księgowość · Kadry · Leasing</span></div>
+      </div>
     </div>
     <div class="reveal">
       <div class="eyebrow">O nas</div>
