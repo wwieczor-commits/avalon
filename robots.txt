@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /stopka-email.html
+
+Sitemap: https://wwieczor-commits.github.io/avalon/sitemap.xml
